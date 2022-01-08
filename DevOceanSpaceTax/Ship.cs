@@ -8,6 +8,9 @@ namespace DevOceanSpaceTax
 {
     public abstract class Ship
     {
+        public long baseTax = 0;
+        public long taxDiscount = 0;
+        public long taxIncrease = 0;
 
         public int PurchaseYear { get; set; }
         public int TaxYear { get; set; }
@@ -41,8 +44,8 @@ namespace DevOceanSpaceTax
             return Mileage / 1000;
         }
 
-       
-
+    
+        
 
 
 
