@@ -44,9 +44,9 @@ namespace DevOceanSpaceTax
             return taxYear;
 
         }
-        public static int YearMade()
+        public static int YearPurchased()
         {
-
+            Console.Clear();
             Messages.YearMade();
             bool IsValid = int.TryParse(Console.ReadLine(), out int yearMade);
 
@@ -77,19 +77,35 @@ namespace DevOceanSpaceTax
             return mileage;
 
         }
-        public static bool YearMadeVsTaxYear(int yearMade, int tYear)
+        public static bool YearMadeVsTaxYear(int yearPurchased, int taxYear)
         {
-            if (yearMade> tYear)
+            if (yearPurchased> taxYear)
             {
                 return false;
             }
 
             return true;
         }
+        public static void TaxAmountValidation(Ship ship,long calculatedTax)
+        {
+            
+            var taxServices = new TaxServices(ship);
+            long applicableTax = taxServices.TaxCalculator();
+            if (applicableTax>0)
+            {
+                Console.WriteLine("For your vessel the due tax is: " + taxServices.TaxCalculator() + " DVS");
+            }
+            else
+            {
+                Console.WriteLine("No due tax");
+            }
+            
+
+        }
         public static void ProgramStart()
         {
             int shipChoice = ShipChoice();
-            int yearMade = YearMade();
+            int yearMade = YearPurchased();
             int taxYear = TaxYearChoice();
 
 
@@ -106,17 +122,16 @@ namespace DevOceanSpaceTax
 
                         var cargo = new Cargo(yearMade, taxYear, mileage);
                         var taxServices = new TaxServices(cargo);
+                        TaxAmountValidation(cargo, taxServices.TaxCalculator());
 
-                        Console.WriteLine("For your cargo vessel the due tax is: " + taxServices.TaxCalculator() + " DVS");
-                        //326768
                         break;
 
 
                     case 2:
                         var family = new Family(yearMade, taxYear, mileage);
                         taxServices = new TaxServices(family);
-                        Console.WriteLine("For your family vessel the due tax amount is: " + taxServices.TaxCalculator() + " DVS");
-                        //2715
+                        TaxAmountValidation(family, taxServices.TaxCalculator());
+
                         break;
 
                 }
@@ -124,9 +139,6 @@ namespace DevOceanSpaceTax
                 
 
             }
-
-
-
             else
             {
 
