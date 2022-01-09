@@ -102,14 +102,18 @@ namespace DevOceanSpaceTax
             
 
         }
-        public static void ProgramStart()
+        
+
+
+        static void Main(string[] args)
         {
+
             int shipChoice = ShipChoice();
             int yearMade = YearPurchased();
             int taxYear = TaxYearChoice();
 
 
-            bool isTaxable = YearMadeVsTaxYear(yearMade,taxYear);
+            bool isTaxable = YearMadeVsTaxYear(yearMade, taxYear);
 
             if (isTaxable)
             {
@@ -136,9 +140,10 @@ namespace DevOceanSpaceTax
 
                 }
 
-                
+
 
             }
+
             else
             {
 
@@ -146,14 +151,6 @@ namespace DevOceanSpaceTax
                 Console.WriteLine($"No tax due for {taxYear} since your ship was made in {yearMade}");
 
             }
-        }
-
-
-        static void Main(string[] args)
-        {
-
-            ProgramStart();
-
 
         }
     }
